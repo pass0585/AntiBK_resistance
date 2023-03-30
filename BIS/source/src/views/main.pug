@@ -1,0 +1,18 @@
+html 
+    head 
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet")
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet")
+        style
+            include css/chat.css
+    body 
+        h1#chatTitle 도란도란
+        div#chatMain
+            div#chatList  
+            form#form.space-x-2.flex
+                input#chatBox(placeholder="채팅을 입력하세요")
+                button#chatButton 보내기
+
+        script(src="/public/client.js")
