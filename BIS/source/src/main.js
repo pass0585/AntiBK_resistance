@@ -29,7 +29,8 @@ const _client = mongoClient.connect()
 async function getChatsCollection() {
   const client = await _client
   client.db('chat')
-  return client.db('chat').collection('chats')
+  const date = new Date().toISOString().split('T')[0]
+  return client.db('chat').collection(date)
 }
 
 //using routes
