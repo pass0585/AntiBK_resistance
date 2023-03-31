@@ -57,26 +57,38 @@
 
     const drawChats = () => {
         chatListEl.innerHTML = ''
+        let bfnick = ''
 
         chats.forEach(({message, nickname }) => {
-            const nickdiv = document.createElement('div')
+
+            const grpdiv = document.createElement('div')
             const chatdiv = document.createElement('div')
+            
             if(nickname == myNickname){
-                chatdiv.setAttribute('class','mychatBubble')
+                grpdiv.setAttribute('class','chat chat2')
             }else{
-                chatdiv.setAttribute('class','chatBubble')
+                grpdiv.setAttribute('class','chat chat1')
             }
-        
-            nickdiv.setAttribute('class','nickname')
-            nickdiv.innerText = `${nickname}`
+
+            chatdiv.setAttribute('class','textbox')
             chatdiv.innerText = `${message}`
-            chatListEl.appendChild(nickdiv)
-            chatListEl.appendChild(chatdiv)
+
+            chatListEl.appendChild(grpdiv)
+
+            if(bfnick !== nickname){
+                const nickdiv = document.createElement('div')
+                nickdiv.setAttribute('class','nickname')
+                nickdiv.innerText = `${nickname}`
+                grpdiv.appendChild(nickdiv)
+            }
+            grpdiv.appendChild(chatdiv)
+
+            bfnick = nickname
         })
     }
     socket.addEventListener('message', (event) => {
         const { type, payload } = JSON.parse(event.data)
-
+        
         if(type ==='sync'){
             const { chats: syncedchats } = payload
             chats.push(...syncedchats)
